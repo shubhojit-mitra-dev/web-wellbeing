@@ -1,0 +1,13 @@
+# Global Owners
+* @shubhojit-mitra-dev
+
+# Extensions & Apps
+/apps/ @shubhojit-mitra-dev
+
+# Shared Core Libraries
+/packages/ @shubhojit-mitra-dev
+
+# CI & Tooling
+/.github/ @shubhojit-mitra-dev
+/turbo.json @shubhojit-mitra-dev
+/pnpm-workspace.yaml @shubhojit-mitra-dev
