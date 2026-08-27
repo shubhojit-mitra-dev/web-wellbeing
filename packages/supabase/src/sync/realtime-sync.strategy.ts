@@ -13,12 +13,8 @@ export class RealtimeSyncStrategy implements ISyncStrategy {
 
     for (const activity of activities) {
       try {
-        const result = await this.activityRepo.insertActivity(activity);
-        if (result) {
-          syncedCount++;
-        } else {
-          errors.push(new Error(`Failed to insert activity ${activity.id}`));
-        }
+        await this.activityRepo.insertBatch([activity]);
+        syncedCount++;
       } catch (err) {
         errors.push(err instanceof Error ? err : new Error(String(err)));
       }

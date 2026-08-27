@@ -6,24 +6,16 @@ import { EmergencyFlushStrategy } from './emergency-flush.strategy';
 describe('EmergencyFlushStrategy', () => {
   it('should immediately attempt to flush all items in bulk', async () => {
     const mockRepo: IActivityRepository = {
-      getActivitiesByUserId: vi.fn(),
-      insertActivity: vi.fn(),
-      bulkInsertActivities: vi.fn().mockImplementation(async (items) => items),
+      getByDateRange: vi.fn(),
+      insertBatch: vi.fn().mockResolvedValue(undefined),
     };
 
     const strategy = new EmergencyFlushStrategy(mockRepo);
     const mockActivity: ActivityRecord = {
-      id: '1',
-      userId: 'u1',
-      deviceId: 'd1',
       domain: 'github.com',
-      categoryId: 1,
-      startedAt: new Date().toISOString(),
-      endedAt: new Date().toISOString(),
-      durationSeconds: 60,
+      startedAt: Date.now() - 60000,
+      endedAt: Date.now(),
       isIdle: false,
-      tabCount: 1,
-      windowCount: 1,
     };
 
     const result = await strategy.sync([mockActivity]);

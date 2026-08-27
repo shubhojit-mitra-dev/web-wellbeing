@@ -2,10 +2,7 @@ import type { ActivityRecord } from '@web-wellbeing/shared';
 
 export class ConflictResolver {
   resolveLastWriteWins(localRecord: ActivityRecord, remoteRecord: ActivityRecord): ActivityRecord {
-    const localTime = new Date(localRecord.endedAt).getTime();
-    const remoteTime = new Date(remoteRecord.endedAt).getTime();
-
-    if (localTime >= remoteTime) {
+    if (localRecord.endedAt >= remoteRecord.endedAt) {
       return localRecord;
     }
     return remoteRecord;
@@ -18,16 +15,16 @@ export class ConflictResolver {
     const recordMap = new Map<string, ActivityRecord>();
 
     for (const rec of remoteList) {
-      recordMap.set(rec.id, rec);
+      recordMap.set(rec.domain, rec);
     }
 
     for (const localRec of localList) {
-      const existing = recordMap.get(localRec.id);
+      const existing = recordMap.get(localRec.domain);
       if (!existing) {
-        recordMap.set(localRec.id, localRec);
+        recordMap.set(localRec.domain, localRec);
       } else {
         const resolved = this.resolveLastWriteWins(localRec, existing);
-        recordMap.set(localRec.id, resolved);
+        recordMap.set(localRec.domain, resolved);
       }
     }
 

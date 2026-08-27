@@ -5,27 +5,22 @@ import { ConflictResolver } from './conflict-resolver';
 describe('ConflictResolver', () => {
   it('should resolve conflicts using last write wins', () => {
     const resolver = new ConflictResolver();
+    const now = Date.now();
     const older: ActivityRecord = {
-      id: '1',
-      userId: 'u1',
-      deviceId: 'd1',
       domain: 'github.com',
-      categoryId: 1,
-      startedAt: '2026-08-27T10:00:00.000Z',
-      endedAt: '2026-08-27T10:05:00.000Z',
-      durationSeconds: 300,
+      startedAt: now - 300000,
+      endedAt: now - 60000,
       isIdle: false,
-      tabCount: 1,
-      windowCount: 1,
     };
 
     const newer: ActivityRecord = {
-      ...older,
-      endedAt: '2026-08-27T10:10:00.000Z',
-      durationSeconds: 600,
+      domain: 'github.com',
+      startedAt: now - 300000,
+      endedAt: now,
+      isIdle: false,
     };
 
     const resolved = resolver.resolveLastWriteWins(newer, older);
-    expect(resolved.durationSeconds).toBe(600);
+    expect(resolved.endedAt).toBe(now);
   });
 });

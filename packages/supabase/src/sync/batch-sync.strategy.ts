@@ -27,18 +27,17 @@ export class BatchSyncStrategy implements ISyncStrategy {
     for (let i = 0; i < activities.length; i += this.batchSize) {
       const batch = activities.slice(i, i + this.batchSize);
       try {
-        const result = await this.activityRepo.bulkInsertActivities(batch);
-        syncedCount += result.length;
+        await this.activityRepo.insertBatch(batch);
+        syncedCount += batch.length;
       } catch (err) {
         errors.push(err instanceof Error ? err : new Error(String(err)));
       }
     }
 
     const failedCount = activities.length - syncedCount;
-    const success = failedCount === 0;
 
     return {
-      success,
+      success: failedCount === 0,
       syncedCount,
       failedCount,
       errors,

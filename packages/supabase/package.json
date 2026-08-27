@@ -13,6 +13,10 @@
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.112.4"
+    "@supabase/supabase-js": "^2.112.4",
+    "@web-wellbeing/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.308"
   }
 }

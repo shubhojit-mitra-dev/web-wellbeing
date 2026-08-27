@@ -19,15 +19,14 @@ export class EmergencyFlushStrategy implements ISyncStrategy {
     }
 
     try {
-      const synced = await this.activityRepo.bulkInsertActivities(activities);
-      const syncedCount = synced.length;
-      const failedCount = activities.length - syncedCount;
+      await this.activityRepo.insertBatch(activities);
+      const syncedCount = activities.length;
 
       return {
-        success: failedCount === 0,
+        success: true,
         syncedCount,
-        failedCount,
-        errors: failedCount > 0 ? [new Error('Emergency flush incomplete')] : [],
+        failedCount: 0,
+        errors: [],
         retryable: false,
       };
     } catch (err) {
