@@ -1,0 +1,8 @@
+{
+  "extends": "@web-wellbeing/tsconfig/base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src/**/*"]
+}
