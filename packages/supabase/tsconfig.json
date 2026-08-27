@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig/base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "baseUrl": ".",
+    "types": ["chrome"],
+    "paths": {
+      "@web-wellbeing/shared": ["../shared/src/index.ts"]
+    }
+  },
+  "include": ["src/**/*"]
+}
