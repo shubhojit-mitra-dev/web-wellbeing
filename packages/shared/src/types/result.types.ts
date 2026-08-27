@@ -23,5 +23,6 @@ export function unwrap<T, E>(result: Result<T, E>): T {
   if (result.ok) {
     return result.value;
   }
-  throw result.error instanceof Error ? result.error : new Error(String(result.error));
+  const errVal = (result as Err<E>).error;
+  throw errVal instanceof Error ? errVal : new Error(String(errVal));
 }
