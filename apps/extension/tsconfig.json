@@ -1,0 +1,12 @@
+{
+  "extends": "@web-wellbeing/tsconfig/extension",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@web-wellbeing/shared": ["../../packages/shared/src/index.ts"],
+      "@web-wellbeing/shared/*": ["../../packages/shared/src/*"]
+    }
+  },
+  "include": ["src/**/*", ".wxt/types/**/*"]
+}
