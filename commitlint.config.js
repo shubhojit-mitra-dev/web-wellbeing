@@ -11,6 +11,7 @@ export default {
         'shared',
         'types',
         'utils',
+        'constants',
         'supabase',
         'ci',
         'tracking',
