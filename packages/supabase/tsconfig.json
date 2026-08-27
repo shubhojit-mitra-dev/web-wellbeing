@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "baseUrl": ".",
+    "typeRoots": ["../../node_modules/@types", "./node_modules/@types"],
     "types": ["chrome"],
     "paths": {
       "@web-wellbeing/shared": ["../shared/src/index.ts"]
