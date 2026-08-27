@@ -18,3 +18,17 @@ export * from './types/result.types';
 export * from './constants/categories';
 export * from './constants/domain-mappings';
 export * from './constants/defaults';
+
+// Utils
+export * from './utils/domain-parser';
+export * from './utils/time-formatter';
+export * from './utils/productivity-calculator';
+export * from './utils/category-matcher';
+export * from './utils/aggregator';
+export * from './utils/session-boundary';
+export * from './utils/date-utils';
+export * from './utils/bytes-formatter';
+export * from './utils/async-utils';
+
+// Validators
+export * from './validators/schemas';
