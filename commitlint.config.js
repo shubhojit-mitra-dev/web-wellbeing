@@ -12,6 +12,7 @@ export default {
         'types',
         'utils',
         'constants',
+        'validators',
         'supabase',
         'ci',
         'tracking',
