@@ -1,0 +1,22 @@
+{
+  "extends": "./packages/tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@web-wellbeing/shared": ["./packages/shared/src/index.ts"],
+      "@web-wellbeing/shared/*": ["./packages/shared/src/*"],
+      "@web-wellbeing/ui": ["./packages/ui/src/index.ts"],
+      "@web-wellbeing/ui/*": ["./packages/ui/src/*"],
+      "@web-wellbeing/supabase": ["./packages/supabase/src/index.ts"],
+      "@web-wellbeing/supabase/*": ["./packages/supabase/src/*"]
+    }
+  },
+  "references": [
+    { "path": "./packages/tsconfig" },
+    { "path": "./packages/eslint-config" },
+    { "path": "./packages/shared" },
+    { "path": "./packages/supabase" },
+    { "path": "./packages/ui" },
+    { "path": "./apps/extension" }
+  ]
+}
