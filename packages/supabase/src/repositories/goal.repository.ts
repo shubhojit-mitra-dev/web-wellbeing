@@ -1,13 +1,13 @@
-import type { GoalConfig } from '@web-wellbeing/shared';
+import type { Goal } from '@web-wellbeing/shared';
 import { getSupabaseClient } from '../client';
 
 export interface IGoalRepository {
-  createGoal(goal: GoalConfig): Promise<void>;
-  getUserGoals(userId: string): Promise<GoalConfig[]>;
+  createGoal(goal: Goal): Promise<void>;
+  getUserGoals(userId: string): Promise<Goal[]>;
 }
 
 export class SupabaseGoalRepository implements IGoalRepository {
-  public async createGoal(goal: GoalConfig): Promise<void> {
+  public async createGoal(goal: Goal): Promise<void> {
     const client = getSupabaseClient();
     const { error } = await client.from('user_goals').insert(goal);
     if (error) {
@@ -15,7 +15,7 @@ export class SupabaseGoalRepository implements IGoalRepository {
     }
   }
 
-  public async getUserGoals(userId: string): Promise<GoalConfig[]> {
+  public async getUserGoals(userId: string): Promise<Goal[]> {
     const client = getSupabaseClient();
     const { data, error } = await client
       .from('user_goals')
@@ -27,6 +27,6 @@ export class SupabaseGoalRepository implements IGoalRepository {
       throw new Error(`Failed to fetch goals: ${error.message}`);
     }
 
-    return (data as GoalConfig[]) ?? [];
+    return (data as Goal[]) ?? [];
   }
 }
