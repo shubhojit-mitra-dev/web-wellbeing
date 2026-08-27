@@ -1,5 +1,5 @@
 {
-  "name": "@web-wellbeing/shared",
+  "name": "@web-wellbeing/supabase",
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
@@ -11,8 +11,5 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest run"
-  },
-  "dependencies": {
-    "zod": "^3.24.2"
   }
 }

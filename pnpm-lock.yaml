@@ -50,6 +50,12 @@ importers:
       '@web-wellbeing/shared':
         specifier: workspace:*
         version: link:../../packages/shared
+      '@web-wellbeing/supabase':
+        specifier: workspace:*
+        version: link:../../packages/supabase
+      '@web-wellbeing/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -90,6 +96,9 @@ importers:
       '@web-wellbeing/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
+      '@wxt-dev/module-react':
+        specifier: ^1.1.3
+        version: 1.2.2(vite@6.4.3(@types/node@26.4.0)(jiti@2.6.1)(yaml@2.9.0))(wxt@0.19.29(@types/node@26.4.0)(rollup@4.63.0)(yaml@2.9.0))
       autoprefixer:
         specifier: ^10.4.20
         version: 10.5.4(postcss@8.5.26)
@@ -124,9 +133,17 @@ importers:
         specifier: ^8.24.0
         version: 8.68.0(eslint@9.39.5(jiti@2.6.1))(typescript@5.9.3)
 
-  packages/shared: {}
+  packages/shared:
+    dependencies:
+      zod:
+        specifier: ^3.24.2
+        version: 3.25.76
+
+  packages/supabase: {}
 
   packages/tsconfig: {}
+
+  packages/ui: {}
 
 packages:
 
@@ -497,6 +514,9 @@ packages:
     resolution: {integrity: sha512-//0sR/cow/s4ICQaYoAobOl4aU8cjU6x/V24V7XkKotb9+O+3zySIYp146vpaobYHnxa4pZX8NkV54Z5AwbDKA==}
     engines: {node: '>=12'}
 
+  '@rolldown/pluginutils@1.0.1':
+    resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
+
   '@rollup/pluginutils@5.4.0':
     resolution: {integrity: sha512-MfPp06CjRLfXQ3wY0R8vJDYBy/MvVcc9OulEfR0B8Iv9ko+GCNaRZ+EpJYFl27LhKsZK0o420sYCRHCjfCgeUg==}
     engines: {node: '>=14.0.0'}
@@ -767,6 +787,22 @@ packages:
     resolution: {integrity: sha512-YR65gGdGvTUAWLldC3xLOvOzamdGzB4A5/N8rehEaHs3Zvoe39BhgY+u0SPch1OvrVTfLcc55wsSgK2NcnTS/A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@vitejs/plugin-react@6.1.0':
+    resolution: {integrity: sha512-qd2BzUBehkov86WFhg0JkEFEYyCLG9uPCe6qWTY/kRlss9OvJrOF2UbIWT7p+8IzZHkEu0DNGHc4HSv+JdDLsw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    peerDependencies:
+      '@rolldown/plugin-babel': ^0.1.7 || ^0.2.0
+      babel-plugin-react-compiler: ^1.0.0
+      oxc-transform-react: ^0.145.0
+      vite: ^8.0.0
+    peerDependenciesMeta:
+      '@rolldown/plugin-babel':
+        optional: true
+      babel-plugin-react-compiler:
+        optional: true
+      oxc-transform-react:
+        optional: true
+
   '@vitest/expect@3.2.7':
     resolution: {integrity: sha512-E8eBXaKibuvH2pSZErOjdVb5vF4PbKYcrnluBTYxEk1l/VhhwZg1kZQsdtjq+CsF5CFydf2Rdkz7jDHKSisi3w==}
 
@@ -807,6 +843,12 @@ packages:
 
   '@wxt-dev/browser@0.2.7':
     resolution: {integrity: sha512-Dr3h3qS25Wah4LjoCSw5uazD+547Q0dLnxaRjkkLauus008daHAulgNKTU4HkojaS9QBdo3xUlwUYPTBCQb+XQ==}
+
+  '@wxt-dev/module-react@1.2.2':
+    resolution: {integrity: sha512-+lRLi1r9dAXpLySWSIWHLJ1h/nFzR20iQnx3RNrKyA6oJg4+ClOluVXozHjfPg9Okfy/umtffiOopGayASrg6w==}
+    peerDependencies:
+      vite: ^5.4.19 || ^6.3.4 || ^7.0.0 || ^8.0.0-0
+      wxt: '>=0.19.16'
 
   '@wxt-dev/storage@1.2.9':
     resolution: {integrity: sha512-dh9TJwvLBM2x4wyy9nE7eYE3wA8pgz1TXSyz7RbdjkJxLfFfWkbeIqiU7VkGy7Vx8sJBmQjoSpk9zSUb3Bjy0Q==}
@@ -2762,8 +2804,8 @@ packages:
   zip-dir@2.0.0:
     resolution: {integrity: sha512-uhlsJZWz26FLYXOD6WVuq+fIcZ3aBPGo/cFdiLlv3KNwpa52IF3ISV8fLhQLiqVu5No3VhlqlgthN6gehil1Dg==}
 
-  zod@4.4.3:
-    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
+  zod@3.25.76:
+    resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
 snapshots:
 
@@ -3097,6 +3139,8 @@ snapshots:
       '@pnpm/network.ca-file': 1.0.2
       config-chain: 1.1.13
 
+  '@rolldown/pluginutils@1.0.1': {}
+
   '@rollup/pluginutils@5.4.0(rollup@4.63.0)':
     dependencies:
       '@types/estree': 1.0.9
@@ -3338,6 +3382,11 @@ snapshots:
       '@typescript-eslint/types': 8.68.0
       eslint-visitor-keys: 5.0.1
 
+  '@vitejs/plugin-react@6.1.0(vite@6.4.3(@types/node@26.4.0)(jiti@2.6.1)(yaml@2.9.0))':
+    dependencies:
+      '@rolldown/pluginutils': 1.0.1
+      vite: 6.4.3(@types/node@26.4.0)(jiti@2.6.1)(yaml@2.9.0)
+
   '@vitest/expect@3.2.7':
     dependencies:
       '@types/chai': 5.2.3
@@ -3395,6 +3444,16 @@ snapshots:
     dependencies:
       '@types/filesystem': 0.0.36
       '@types/har-format': 1.2.16
+
+  '@wxt-dev/module-react@1.2.2(vite@6.4.3(@types/node@26.4.0)(jiti@2.6.1)(yaml@2.9.0))(wxt@0.19.29(@types/node@26.4.0)(rollup@4.63.0)(yaml@2.9.0))':
+    dependencies:
+      '@vitejs/plugin-react': 6.1.0(vite@6.4.3(@types/node@26.4.0)(jiti@2.6.1)(yaml@2.9.0))
+      vite: 6.4.3(@types/node@26.4.0)(jiti@2.6.1)(yaml@2.9.0)
+      wxt: 0.19.29(@types/node@26.4.0)(rollup@4.63.0)(yaml@2.9.0)
+    transitivePeerDependencies:
+      - '@rolldown/plugin-babel'
+      - babel-plugin-react-compiler
+      - oxc-transform-react
 
   '@wxt-dev/storage@1.2.9':
     dependencies:
@@ -4695,7 +4754,7 @@ snapshots:
       formdata-node: 6.0.3
       listr2: 8.3.3
       ofetch: 1.5.1
-      zod: 4.4.3
+      zod: 3.25.76
 
   punycode@2.3.1: {}
 
@@ -5352,4 +5411,4 @@ snapshots:
       async: 3.2.6
       jszip: 3.10.1
 
-  zod@4.4.3: {}
+  zod@3.25.76: {}
