@@ -12,8 +12,7 @@ export class FocusEngine {
   private pomodoroPhase: PomodoroPhase = 'work';
   private activeSession: FocusSession | null = null;
   private interruptionCount = 0;
-  private timerId: ReturnType<typeof setInterval> | null = null;
-  private remainingSeconds = 0;
+  private pausedRemainingSeconds = 0;
 
   public getState(): FocusState {
     return this.state;
@@ -36,14 +35,25 @@ export class FocusEngine {
   }
 
   public getRemainingSeconds(): number {
-    return this.remainingSeconds;
+    if (this.state === 'inactive' || !this.activeSession) {
+      return 0;
+    }
+
+    if (this.state === 'paused') {
+      return this.pausedRemainingSeconds;
+    }
+
+    const elapsedMs = Date.now() - new Date(this.activeSession.startedAt).getTime();
+    const elapsedSeconds = Math.floor(elapsedMs / 1000);
+    const totalPlannedSeconds = (this.activeSession.plannedDurationMinutes ?? 25) * 60;
+
+    return Math.max(0, totalPlannedSeconds - elapsedSeconds);
   }
 
   public async startSession(options: StartSessionOptions = {}): Promise<FocusSession> {
     const { mode = 'focus', plannedDurationMinutes = 25, blockedDomains = [] } = options;
 
     this.interruptionCount = 0;
-    this.remainingSeconds = plannedDurationMinutes * 60;
     this.state = 'active';
     this.pomodoroPhase = 'work';
 
@@ -59,41 +69,44 @@ export class FocusEngine {
       interruptionCount: 0,
     };
 
+    this.pausedRemainingSeconds = plannedDurationMinutes * 60;
     await updateDynamicRules(blockedDomains);
-    this.startTimer();
 
     return this.activeSession;
   }
 
   public pauseSession(): void {
     if (this.state === 'active') {
+      this.pausedRemainingSeconds = this.getRemainingSeconds();
       this.state = 'paused';
-      this.stopTimer();
     }
   }
 
   public resumeSession(): void {
     if (this.state === 'paused') {
       this.state = 'active';
-      this.startTimer();
     }
   }
 
   public async endSession(completed = false): Promise<FocusSession | null> {
-    this.stopTimer();
     const session = this.activeSession;
 
     if (session) {
+      const actualDurationSeconds = Math.floor(
+        (Date.now() - new Date(session.startedAt).getTime()) / 1000,
+      );
+
       const endedSession: FocusSession = {
         ...session,
         endedAt: new Date().toISOString(),
+        actualDurationSeconds,
         completed,
         interruptionCount: this.interruptionCount,
       };
 
       this.activeSession = null;
       this.state = 'inactive';
-      this.remainingSeconds = 0;
+      this.pausedRemainingSeconds = 0;
 
       await updateDynamicRules([]);
       return endedSession;
@@ -106,24 +119,6 @@ export class FocusEngine {
   public recordInterruption(_domain: string): void {
     if (this.state === 'active') {
       this.interruptionCount += 1;
-    }
-  }
-
-  private startTimer(): void {
-    this.stopTimer();
-    this.timerId = setInterval(() => {
-      if (this.remainingSeconds > 0) {
-        this.remainingSeconds -= 1;
-      } else {
-        void this.endSession(true);
-      }
-    }, 1000);
-  }
-
-  private stopTimer(): void {
-    if (this.timerId) {
-      clearInterval(this.timerId);
-      this.timerId = null;
     }
   }
 }
