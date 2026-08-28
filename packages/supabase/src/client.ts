@@ -1,7 +1,18 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = process.env.VITE_SUPABASE_URL ?? 'https://placeholder-url.supabase.co';
-const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_ANON_KEY ?? 'placeholder-anon-key';
+const getEnvVar = (key: string, defaultValue: string): string => {
+  const meta = import.meta as unknown as { env?: Record<string, string> };
+  if (meta && meta.env && meta.env[key]) {
+    return meta.env[key];
+  }
+  if (typeof process !== 'undefined' && process.env && process.env[key]) {
+    return process.env[key] as string;
+  }
+  return defaultValue;
+};
+
+const SUPABASE_URL = getEnvVar('VITE_SUPABASE_URL', 'https://placeholder-url.supabase.co');
+const SUPABASE_ANON_KEY = getEnvVar('VITE_SUPABASE_ANON_KEY', 'placeholder-anon-key');
 
 let clientInstance: SupabaseClient | null = null;
 
