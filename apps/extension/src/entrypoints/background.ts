@@ -1,3 +1,4 @@
+import '@/lib/polyfill';
 import { setupAlarms } from '@/background/alarms';
 import { setupMessageRouter } from '@/background/messages';
 import { TrackingEngine } from '@/tracking/engine';
