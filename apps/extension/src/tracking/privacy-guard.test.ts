@@ -16,8 +16,10 @@ describe('privacy-guard suite', () => {
     expect(shouldTrackTab('https://example.com', true, true)).toBe(true);
   });
 
-  it('handles empty, null, or invalid URLs gracefully', () => {
+  it('handles empty, null, or invalid URLs gracefully without throwing', () => {
     expect(shouldTrackTab('', false, false)).toBe(false);
     expect(shouldTrackTab('javascript:void(0)', false, false)).toBe(false);
+    expect(shouldTrackTab(null as unknown as string, false, false)).toBe(false);
+    expect(shouldTrackTab(undefined as unknown as string, false, false)).toBe(false);
   });
 });
