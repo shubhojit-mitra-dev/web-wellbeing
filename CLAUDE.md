@@ -15,6 +15,10 @@ replaces the browser new tab page with a productivity dashboard.
 5. Storage adapter maps Supabase client to `chrome.storage.local` (no localStorage in SW).
 6. Service workers die after ~30s — ALL state in `chrome.storage`, heartbeat via `chrome.alarms`.
 
+## Professional Formatting & Tone Standards
+
+- Maintain clean, professional formatting across all workflow definitions, log messages, commit messages, and source documentation. Do NOT use decorative non-text pictorial symbols in configurations or workflow names.
+
 ## TDD & Quality Assurance Principles
 
 - **Strict TDD Workflow**: Write unit/integration tests covering happy paths, edge cases, error states, and DOM style assertions BEFORE or WITH implementation code.
