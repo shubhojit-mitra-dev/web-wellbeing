@@ -11,7 +11,7 @@ describe('TrackingEngine suite', () => {
   it('initializes listeners safely when chrome API is absent', () => {
     const engine = new TrackingEngine();
     engine.init();
-    // Verify no session is active initially
+    // Verify instance is ready
     expect(engine).toBeInstanceOf(TrackingEngine);
   });
 
@@ -31,10 +31,15 @@ describe('TrackingEngine suite', () => {
     await engine.flushCurrentSession(true);
 
     expect(saveSpy).toHaveBeenCalledTimes(1);
-    const savedRecord = saveSpy.mock.calls[0][0] as ActivityRecord;
-    expect(savedRecord.domain).toBe('github.com');
-    expect(savedRecord.isIdle).toBe(true);
-    expect(savedRecord.endedAt).toBeGreaterThanOrEqual(savedRecord.startedAt);
+    const firstCall = saveSpy.mock.calls[0];
+    expect(firstCall).toBeDefined();
+
+    if (firstCall) {
+      const savedRecord = firstCall[0] as ActivityRecord;
+      expect(savedRecord.domain).toBe('github.com');
+      expect(savedRecord.isIdle).toBe(true);
+      expect(savedRecord.endedAt).toBeGreaterThanOrEqual(savedRecord.startedAt);
+    }
   });
 
   it('clears current active session state after flushing', async () => {
