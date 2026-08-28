@@ -3,8 +3,23 @@ import { BackgroundSyncCoordinator } from './background-sync-coordinator';
 import type { ActivityRecord } from '@web-wellbeing/shared';
 
 describe('BackgroundSyncCoordinator suite', () => {
+  let mockStorage: Record<string, unknown> = {};
+
   beforeEach(() => {
     vi.restoreAllMocks();
+    mockStorage = {};
+
+    vi.stubGlobal('chrome', {
+      storage: {
+        local: {
+          get: vi.fn((key: string) => Promise.resolve({ [key]: mockStorage[key] })),
+          set: vi.fn((data: Record<string, unknown>) => {
+            Object.assign(mockStorage, data);
+            return Promise.resolve();
+          }),
+        },
+      },
+    });
   });
 
   const sampleActivity: ActivityRecord = {
@@ -16,16 +31,26 @@ describe('BackgroundSyncCoordinator suite', () => {
     isIdle: false,
   };
 
-  it('enqueues activity item into persistent offline sync queue', async () => {
+  it('enqueues activity item, loading existing storage items first to prevent data loss', async () => {
+    mockStorage['wellbeing_offline_sync_queue'] = [
+      { domain: 'existing.com', startedAt: 1, endedAt: 2, isIdle: false },
+    ];
+
     const coordinator = new BackgroundSyncCoordinator();
     await coordinator.enqueueActivity(sampleActivity);
 
     const queuedItems = await coordinator.getQueuedActivities();
-    expect(queuedItems).toHaveLength(1);
-    expect(queuedItems[0]).toEqual(sampleActivity);
+    expect(queuedItems).toHaveLength(2);
+    expect(queuedItems[1]).toEqual(sampleActivity);
+    expect(chrome.storage.local.set).toHaveBeenCalledWith({
+      wellbeing_offline_sync_queue: [
+        { domain: 'existing.com', startedAt: 1, endedAt: 2, isIdle: false },
+        sampleActivity,
+      ],
+    });
   });
 
-  it('flushes queued activities via repository and clears offline queue on success', async () => {
+  it('flushes queued activities via repository and clears chrome.storage.local on success', async () => {
     const coordinator = new BackgroundSyncCoordinator();
     await coordinator.enqueueActivity(sampleActivity);
 
@@ -41,9 +66,10 @@ describe('BackgroundSyncCoordinator suite', () => {
 
     const remainingQueue = await coordinator.getQueuedActivities();
     expect(remainingQueue).toHaveLength(0);
+    expect(mockStorage['wellbeing_offline_sync_queue']).toEqual([]);
   });
 
-  it('retains queued items in offline queue when sync repository throws error', async () => {
+  it('retains queued items in chrome.storage.local when sync repository throws error', async () => {
     const coordinator = new BackgroundSyncCoordinator();
     await coordinator.enqueueActivity(sampleActivity);
 
@@ -56,5 +82,6 @@ describe('BackgroundSyncCoordinator suite', () => {
 
     const remainingQueue = await coordinator.getQueuedActivities();
     expect(remainingQueue).toHaveLength(1);
+    expect(mockStorage['wellbeing_offline_sync_queue']).toEqual([sampleActivity]);
   });
 });
