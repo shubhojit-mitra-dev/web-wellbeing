@@ -7,12 +7,19 @@ describe('declarative-net-request rule builder suite', () => {
     const rules = buildBlockingRules(domains);
 
     expect(rules).toHaveLength(2);
-    expect(rules[0].id).toBe(1);
-    expect(rules[0].action.type).toBe('redirect');
-    expect(rules[0].condition.urlFilter).toBe('*://*.facebook.com/*');
 
-    expect(rules[1].id).toBe(2);
-    expect(rules[1].condition.urlFilter).toBe('*://*.twitter.com/*');
+    const [rule1, rule2] = rules;
+    expect(rule1).toBeDefined();
+    expect(rule2).toBeDefined();
+
+    if (rule1 && rule2) {
+      expect(rule1.id).toBe(1);
+      expect(rule1.action.type).toBe('redirect');
+      expect(rule1.condition.urlFilter).toBe('*://*.facebook.com/*');
+
+      expect(rule2.id).toBe(2);
+      expect(rule2.condition.urlFilter).toBe('*://*.twitter.com/*');
+    }
   });
 
   it('returns empty rules array for empty domain list or invalid inputs', () => {
