@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { StatCardSkeleton } from '@web-wellbeing/ui';
 import { DashboardLayout } from '../../components/dashboard/DashboardLayout';

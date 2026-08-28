@@ -17,7 +17,7 @@ describe('session-builder', () => {
     );
 
     expect(record.domain).toBe('github.com');
-    expect(record.durationSeconds).toBe(300);
+    expect(record.endedAt - record.startedAt).toBe(300000);
     expect(record.isIdle).toBe(false);
   });
 });

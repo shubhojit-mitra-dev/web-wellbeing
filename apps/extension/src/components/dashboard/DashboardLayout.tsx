@@ -1,4 +1,3 @@
-import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { SidebarNav } from './SidebarNav';
 import { HeaderBar } from './HeaderBar';

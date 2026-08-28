@@ -2,6 +2,9 @@ import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
+  {
+    ignores: ['**/dist/**', '**/node_modules/**', '**/.output/**', '**/coverage/**', '**/.wxt/**'],
+  },
   js.configs.recommended,
   ...tseslint.configs.strict,
   {
@@ -18,5 +21,5 @@ export default tseslint.config(
         { prefer: 'type-imports', fixStyle: 'separate-type-imports' },
       ],
     },
-  }
+  },
 );

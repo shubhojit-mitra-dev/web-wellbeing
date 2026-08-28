@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@web-wellbeing/ui';
 import { Clock, Zap, Target, ShieldCheck } from 'lucide-react';
 

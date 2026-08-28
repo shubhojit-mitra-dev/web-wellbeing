@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@web-wellbeing/ui';
 
 export default function AnalyticsView() {
@@ -9,7 +8,7 @@ export default function AnalyticsView() {
           Analytics & Usage Insights
         </h1>
         <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-          Detailed breakdown of your browsing patterns, trends, and category distribution.
+          Explore historical browsing trends, productivity distributions, and category breakdowns.
         </p>
       </div>
 
@@ -19,7 +18,7 @@ export default function AnalyticsView() {
         </CardHeader>
         <CardContent className="h-72 flex items-center justify-center border-t border-zinc-200/60 dark:border-zinc-800/60 mt-4">
           <p className="text-sm text-zinc-400 dark:text-zinc-500">
-            Recharts analytics view will be mounted here
+            Recharts analytics components will be mounted here in Phase 17
           </p>
         </CardContent>
       </Card>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Sun, Moon, Zap, User } from 'lucide-react';
 import { StatusIndicator, Button } from '@web-wellbeing/ui';
 import { useThemeStore } from '../../stores/use-theme-store';

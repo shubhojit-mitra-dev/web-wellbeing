@@ -1,0 +1,43 @@
+name: Package Extension Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  package:
+    name: Build & Zip Extension Packages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10.27.0
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Chrome Zip Release
+        run: pnpm --filter extension exec wxt zip
+
+      - name: Build Firefox Zip Release
+        run: pnpm --filter extension exec wxt zip -b firefox
+
+      - name: Upload Extension Packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension-release-zips
+          path: apps/extension/.output/*.zip
+          retention-days: 30

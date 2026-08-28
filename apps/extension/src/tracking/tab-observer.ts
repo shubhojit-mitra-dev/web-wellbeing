@@ -1,4 +1,10 @@
-import type { TabState } from '@web-wellbeing/shared';
+export interface TabState {
+  tabId: number;
+  windowId: number;
+  url: string;
+  title: string;
+  incognito: boolean;
+}
 
 export type TabChangeListener = (tabState: TabState | null) => void;
 
