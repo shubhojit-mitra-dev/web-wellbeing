@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { DashboardErrorBoundary } from './DashboardErrorBoundary';
 
-function ProblemChild(): JSX.Element {
+function ProblemChild(): null {
   throw new Error('Component crashed during render!');
 }
 

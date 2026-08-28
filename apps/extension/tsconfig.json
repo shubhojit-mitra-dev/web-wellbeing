@@ -2,6 +2,7 @@
   "extends": "@web-wellbeing/tsconfig/extension",
   "compilerOptions": {
     "baseUrl": ".",
+    "types": ["vitest/globals"],
     "paths": {
       "@/*": ["./src/*"],
       "@web-wellbeing/shared": ["../../packages/shared/src/index.ts"],

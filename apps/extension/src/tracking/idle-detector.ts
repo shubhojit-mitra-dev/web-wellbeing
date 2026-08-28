@@ -13,6 +13,10 @@ export class IdleDetector {
     }
   }
 
+  public getDetectionInterval(): number {
+    return this.detectionIntervalSeconds;
+  }
+
   public getIdleState(): IdleState {
     return this.currentState;
   }
