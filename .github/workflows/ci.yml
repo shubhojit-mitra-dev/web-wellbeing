@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   security-audit:
-    name: 🔒 Security Audit (pnpm audit)
+    name: Security Audit (pnpm audit)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -32,7 +32,7 @@ jobs:
         run: pnpm audit --audit-level=high
 
   lint-and-typecheck:
-    name: 🧹 Lint & Typecheck
+    name: Lint and Typecheck
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -59,7 +59,7 @@ jobs:
         run: pnpm typecheck
 
   unit-tests:
-    name: 🧪 Vitest Unit & Integration Tests
+    name: Vitest Unit and Integration Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -83,7 +83,7 @@ jobs:
         run: pnpm test
 
   e2e-tests:
-    name: 🎭 Playwright Extension E2E Tests
+    name: Playwright Extension E2E Tests
     needs: [lint-and-typecheck]
     runs-on: ubuntu-latest
     steps:
@@ -111,7 +111,7 @@ jobs:
         run: xvfb-run pnpm test:e2e
 
   build-and-package:
-    name: 📦 Extension Production Build
+    name: Extension Production Build
     needs: [security-audit, lint-and-typecheck, unit-tests, e2e-tests]
     runs-on: ubuntu-latest
     steps:
