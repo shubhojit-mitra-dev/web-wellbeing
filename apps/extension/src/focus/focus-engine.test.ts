@@ -29,7 +29,7 @@ describe('FocusEngine suite', () => {
     expect(engine.getRemainingSeconds()).toBe(1500); // 25 mins * 60
   });
 
-  it('pauses and resumes active focus session correctly', async () => {
+  it('pauses and resumes active focus session correctly, maintaining remaining seconds across pause duration', async () => {
     const engine = new FocusEngine();
     await engine.startSession({ mode: 'focus', plannedDurationMinutes: 25, blockedDomains: [] });
 
@@ -37,9 +37,14 @@ describe('FocusEngine suite', () => {
     expect(engine.getState()).toBe('paused');
     expect(engine.isFocusActive()).toBe(false);
 
+    const remainingWhenPaused = engine.getRemainingSeconds();
+
     engine.resumeSession();
     expect(engine.getState()).toBe('active');
     expect(engine.isFocusActive()).toBe(true);
+
+    // Remaining seconds immediately after resume must match remaining time when paused
+    expect(engine.getRemainingSeconds()).toBe(remainingWhenPaused);
   });
 
   it('ends active focus session and calculates duration', async () => {
