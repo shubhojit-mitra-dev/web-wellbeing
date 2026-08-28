@@ -1,5 +1,5 @@
 import type { ActivityRecord } from '@web-wellbeing/shared';
-import { extractDomain, getCategoryForDomain } from '@web-wellbeing/shared';
+import { parseDomain, resolveCategoryId } from '@web-wellbeing/shared';
 
 export interface RawTabSession {
   url: string;
@@ -12,8 +12,8 @@ export function createActivityRecord(
   endedAt: Date = new Date(),
   isIdle = false,
 ): ActivityRecord {
-  const domain = extractDomain(session.url);
-  const categoryId = getCategoryForDomain(domain);
+  const domain = parseDomain(session.url);
+  const categoryId = resolveCategoryId(domain);
   const durationSeconds = Math.max(
     0,
     Math.floor((endedAt.getTime() - session.startedAt.getTime()) / 1000),

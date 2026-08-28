@@ -36,6 +36,7 @@
     "@web-wellbeing/tsconfig": "workspace:*",
     "@wxt-dev/module-react": "^1.1.3",
     "autoprefixer": "^10.4.20",
+    "happy-dom": "^20.11.12",
     "postcss": "^8.5.2",
     "tailwindcss": "^4.0.7",
     "vite": "^6.1.0",

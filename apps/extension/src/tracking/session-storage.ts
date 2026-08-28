@@ -8,7 +8,7 @@ export async function saveActivityRecord(record: ActivityRecord): Promise<void> 
   }
 
   const result = await chrome.storage.local.get([STORAGE_KEY_ACTIVITIES]);
-  const existing: ActivityRecord[] = (result[STORAGE_KEY_ACTIVITIES] as ActivityRecord[]) ?? [];
+  const existing: ActivityRecord[] = (result?.[STORAGE_KEY_ACTIVITIES] as ActivityRecord[]) ?? [];
   existing.push(record);
   await chrome.storage.local.set({ [STORAGE_KEY_ACTIVITIES]: existing });
 }
@@ -19,7 +19,7 @@ export async function getUnsyncedActivities(): Promise<ActivityRecord[]> {
   }
 
   const result = await chrome.storage.local.get([STORAGE_KEY_ACTIVITIES]);
-  return (result[STORAGE_KEY_ACTIVITIES] as ActivityRecord[]) ?? [];
+  return (result?.[STORAGE_KEY_ACTIVITIES] as ActivityRecord[]) ?? [];
 }
 
 export async function clearUnsyncedActivities(): Promise<void> {
