@@ -1,4 +1,6 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@web-wellbeing/ui';
+import { PomodoroTimerCard } from '../components/focus/PomodoroTimerCard';
+import { BlocklistManagerCard } from '../components/focus/BlocklistManagerCard';
+import { FocusStatsCard } from '../components/focus/FocusStatsCard';
 
 export default function FocusView() {
   return (
@@ -12,16 +14,15 @@ export default function FocusView() {
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Focus Mode Control Panel</CardTitle>
-        </CardHeader>
-        <CardContent className="h-72 flex items-center justify-center border-t border-zinc-200/60 dark:border-zinc-800/60 mt-4">
-          <p className="text-sm text-zinc-400 dark:text-zinc-500">
-            Focus Timer and Pomodoro control widgets will be mounted here in Phase 13
-          </p>
-        </CardContent>
-      </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2 space-y-6">
+          <PomodoroTimerCard />
+          <FocusStatsCard />
+        </div>
+        <div className="lg:col-span-1">
+          <BlocklistManagerCard />
+        </div>
+      </div>
     </div>
   );
 }
