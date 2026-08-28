@@ -21,6 +21,9 @@ export default defineConfig({
     description: 'AI-powered browser companion & productivity dashboard',
     permissions: ['tabs', 'storage', 'alarms', 'idle', 'activeTab', 'webRequest', 'identity'],
     host_permissions: ['<all_urls>'],
+    content_security_policy: {
+      extension_pages: "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';",
+    },
     commands: {
       'toggle-focus': {
         suggested_key: {
