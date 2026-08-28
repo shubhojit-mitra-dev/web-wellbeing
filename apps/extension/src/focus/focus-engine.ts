@@ -83,8 +83,16 @@ export class FocusEngine {
   }
 
   public resumeSession(): void {
-    if (this.state === 'paused') {
+    if (this.state === 'paused' && this.activeSession) {
       this.state = 'active';
+
+      // Shift startedAt timestamp forward so paused time is excluded from elapsed time
+      const totalPlannedSeconds = (this.activeSession.plannedDurationMinutes ?? 25) * 60;
+      const elapsedSeconds = totalPlannedSeconds - this.pausedRemainingSeconds;
+      this.activeSession = {
+        ...this.activeSession,
+        startedAt: new Date(Date.now() - elapsedSeconds * 1000).toISOString(),
+      };
     }
   }
 
