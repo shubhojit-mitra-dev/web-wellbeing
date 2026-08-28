@@ -13,7 +13,7 @@ describe('FocusEngine suite', () => {
     expect(engine.isFocusActive()).toBe(false);
   });
 
-  it('starts focus session, updates active state, and sets up blocklist rules', async () => {
+  it('starts focus session, updates active state, and calculates remaining time accurately', async () => {
     const engine = new FocusEngine();
     const blocklist = ['facebook.com', 'twitter.com'];
 
@@ -26,6 +26,7 @@ describe('FocusEngine suite', () => {
     expect(engine.getState()).toBe('active');
     expect(engine.isFocusActive()).toBe(true);
     expect(engine.getBlockedDomains()).toEqual(blocklist);
+    expect(engine.getRemainingSeconds()).toBe(1500); // 25 mins * 60
   });
 
   it('pauses and resumes active focus session correctly', async () => {
