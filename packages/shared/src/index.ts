@@ -29,6 +29,7 @@ export * from './utils/session-boundary';
 export * from './utils/date-utils';
 export * from './utils/bytes-formatter';
 export * from './utils/async-utils';
+export * from './utils/focus-matcher';
 
 // Validators
 export * from './validators/schemas';
