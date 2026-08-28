@@ -26,7 +26,7 @@ export function buildBlockingRules(domains: readonly string[]): BlockingRule[] {
         redirect: { extensionPath: '/newtab.html#/focus?blocked=true' },
       },
       condition: {
-        urlFilter: `*://*.${cleanDomain}/*`,
+        urlFilter: `||${cleanDomain}`,
         resourceTypes: ['main_frame'],
       },
     };
