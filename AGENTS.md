@@ -103,3 +103,7 @@ is NO separate web application.
 - Types: `kebab-case.types.ts`
 - Tests: `*.test.ts` or `*.test.tsx` colocated with source
 - Conventional Commits enforced (`feat`, `fix`, `test`, `refactor`, `chore`, `ci`, `docs`, `style`, `perf`).
+
+### Professional Formatting Standards
+
+- Maintain strict professional formatting across all project manifests, CI workflows, logs, and commit logs. Avoid decorative unicode pictorial symbols in system configurations, workflow labels, and source documentation unless strictly functional for user-facing UI controls.
