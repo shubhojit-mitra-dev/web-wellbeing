@@ -32,16 +32,14 @@ export function SidebarNav() {
       {/* Brand Header */}
       <div className="flex h-16 items-center border-b border-zinc-200/60 dark:border-zinc-800/60 px-4">
         {sidebarCollapsed ? (
-          <div className="flex w-full items-center justify-between">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 text-white font-bold text-lg shadow-md shadow-emerald-900/30">
-              W
-            </div>
+          <div className="flex w-full items-center justify-center">
             <button
               onClick={toggleSidebar}
-              className="rounded-lg p-1 text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+              className="group flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 text-white font-bold text-lg shadow-md shadow-emerald-900/30 hover:scale-105 transition-transform"
               title="Expand sidebar"
             >
-              <ChevronRight className="h-4 w-4" />
+              <span className="group-hover:hidden">W</span>
+              <ChevronRight className="hidden group-hover:block h-5 w-5" />
             </button>
           </div>
         ) : (
