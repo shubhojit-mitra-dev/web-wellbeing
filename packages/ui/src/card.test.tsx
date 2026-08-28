@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest';
-import React from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './card';
 
 describe('Card component suite', () => {
