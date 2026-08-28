@@ -9,8 +9,12 @@ export default defineConfig({
   runner: {
     disabled: true,
   },
-  vite: () => ({
+  vite: (env) => ({
     plugins: [tailwindcss()],
+    define: {
+      'process.env': {},
+      'process.env.NODE_ENV': JSON.stringify(env.mode || 'development'),
+    },
   }),
   manifest: {
     name: 'Web Wellbeing',
