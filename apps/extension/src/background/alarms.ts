@@ -1,3 +1,6 @@
+import { BackgroundSyncCoordinator } from '../sync/background-sync-coordinator';
+import { SupabaseActivityRepository } from '@web-wellbeing/supabase';
+
 export const ALARM_NAMES = {
   HEARTBEAT: 'web-wellbeing-heartbeat',
   SYNC_BATCH: 'web-wellbeing-sync-batch',
@@ -5,6 +8,10 @@ export const ALARM_NAMES = {
 } as const;
 
 export function setupAlarms(): void {
+  if (typeof chrome === 'undefined' || !chrome.alarms) {
+    return;
+  }
+
   chrome.alarms.create(ALARM_NAMES.HEARTBEAT, { periodInMinutes: 0.5 });
   chrome.alarms.create(ALARM_NAMES.SYNC_BATCH, { periodInMinutes: 5.0 });
 
@@ -13,9 +20,15 @@ export function setupAlarms(): void {
       case ALARM_NAMES.HEARTBEAT:
         console.log('[Alarms] Heartbeat tick');
         break;
-      case ALARM_NAMES.SYNC_BATCH:
+      case ALARM_NAMES.SYNC_BATCH: {
         console.log('[Alarms] Sync batch tick');
+        const coordinator = new BackgroundSyncCoordinator();
+        const repository = new SupabaseActivityRepository();
+        coordinator.flushQueue(repository).catch((err) => {
+          console.error('[Alarms] Failed to flush offline sync queue:', err);
+        });
         break;
+      }
       case ALARM_NAMES.POMODORO_TICK:
         console.log('[Alarms] Pomodoro tick');
         break;
