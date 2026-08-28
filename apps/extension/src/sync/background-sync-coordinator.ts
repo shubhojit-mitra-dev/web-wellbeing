@@ -7,6 +7,7 @@ export class BackgroundSyncCoordinator {
   private inMemoryQueue: ActivityRecord[] = [];
 
   public async enqueueActivity(activity: ActivityRecord): Promise<void> {
+    await this.loadQueue();
     this.inMemoryQueue.push(activity);
     await this.persistQueue();
   }
