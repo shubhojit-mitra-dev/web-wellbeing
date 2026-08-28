@@ -5,7 +5,11 @@ export class NetworkMonitor {
   private isOnlineState = true;
 
   constructor() {
-    if (typeof window !== 'undefined' && typeof navigator !== 'undefined') {
+    if (
+      typeof window !== 'undefined' &&
+      typeof navigator !== 'undefined' &&
+      typeof navigator.onLine === 'boolean'
+    ) {
       this.isOnlineState = navigator.onLine;
       window.addEventListener('online', () => this.handleStatusChange(true));
       window.addEventListener('offline', () => this.handleStatusChange(false));
@@ -13,7 +17,7 @@ export class NetworkMonitor {
   }
 
   isOnline(): boolean {
-    if (typeof navigator !== 'undefined') {
+    if (typeof navigator !== 'undefined' && typeof navigator.onLine === 'boolean') {
       return navigator.onLine;
     }
     return this.isOnlineState;
