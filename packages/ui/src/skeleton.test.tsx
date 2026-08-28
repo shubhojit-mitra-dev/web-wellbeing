@@ -1,15 +1,19 @@
 import { describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { Skeleton, StatCardSkeleton } from './skeleton';
 
 describe('Skeleton loader suite', () => {
-  it('instantiates Skeleton component with className', () => {
-    const el = <Skeleton className="h-4 w-12" />;
-    expect(el.type).toBe(Skeleton);
-    expect(el.props.className).toBe('h-4 w-12');
+  it('renders Skeleton with pulse animation class', () => {
+    const { container } = render(<Skeleton className="h-4 w-12" />);
+    const div = container.firstChild as HTMLElement;
+    expect(div).toHaveClass('animate-pulse');
+    expect(div).toHaveClass('h-4');
   });
 
-  it('instantiates StatCardSkeleton component', () => {
-    const el = <StatCardSkeleton />;
-    expect(el.type).toBe(StatCardSkeleton);
+  it('renders StatCardSkeleton container structure', () => {
+    const { container } = render(<StatCardSkeleton />);
+    const skeletons = container.querySelectorAll('.animate-pulse');
+    expect(skeletons.length).toBeGreaterThan(0);
   });
 });

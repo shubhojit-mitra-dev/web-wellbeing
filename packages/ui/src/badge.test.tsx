@@ -1,22 +1,28 @@
 import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { Badge, StatusIndicator } from './badge';
 
-describe('Badge and StatusIndicator', () => {
-  it('renders Badge component with variants', () => {
-    const defaultBadge = <Badge variant="default">Default</Badge>;
-    const successBadge = <Badge variant="success">Active</Badge>;
-    const errorBadge = <Badge variant="destructive">Error</Badge>;
+describe('Badge and StatusIndicator suite', () => {
+  it('renders Badge component with text and variant classes', () => {
+    const { rerender } = render(<Badge variant="default">Active</Badge>);
+    const badge = screen.getByText('Active');
+    expect(badge).toBeInTheDocument();
+    expect(badge).toHaveClass('bg-emerald-100');
 
-    expect(defaultBadge.props.children).toBe('Default');
-    expect(successBadge.props.variant).toBe('success');
-    expect(errorBadge.props.variant).toBe('destructive');
+    rerender(<Badge variant="destructive">Error</Badge>);
+    expect(screen.getByText('Error')).toHaveClass('bg-red-100');
   });
 
-  it('renders StatusIndicator active vs inactive states', () => {
-    const activeInd = <StatusIndicator active label="Online" />;
-    const inactiveInd = <StatusIndicator active={false} label="Offline" />;
+  it('renders StatusIndicator with pulse effect when active', () => {
+    const { container, rerender } = render(<StatusIndicator active label="Tracking Engine" />);
+    expect(screen.getByText('Tracking Engine')).toBeInTheDocument();
 
-    expect(activeInd.props.active).toBe(true);
-    expect(inactiveInd.props.active).toBe(false);
+    const pingDot = container.querySelector('.animate-ping');
+    expect(pingDot).toBeInTheDocument();
+
+    rerender(<StatusIndicator active={false} label="Tracking Engine" />);
+    const updatedPing = container.querySelector('.animate-ping');
+    expect(updatedPing).not.toBeInTheDocument();
   });
 });

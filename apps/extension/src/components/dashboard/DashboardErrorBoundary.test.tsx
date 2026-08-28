@@ -1,17 +1,38 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import { DashboardErrorBoundary } from './DashboardErrorBoundary';
 
-describe('DashboardErrorBoundary component', () => {
+function ProblemChild(): JSX.Element {
+  throw new Error('Component crashed during render!');
+}
+
+describe('DashboardErrorBoundary component suite', () => {
   it('renders children when no error occurs', () => {
-    const boundary = new DashboardErrorBoundary({ children: 'Child Content' });
-    expect(boundary.state.hasError).toBe(false);
+    render(
+      <DashboardErrorBoundary>
+        <div>Normal View Content</div>
+      </DashboardErrorBoundary>,
+    );
+
+    expect(screen.getByText('Normal View Content')).toBeInTheDocument();
   });
 
-  it('updates state on error caught via getDerivedStateFromError', () => {
-    const error = new Error('Test crash');
-    const newState = DashboardErrorBoundary.getDerivedStateFromError(error);
+  it('catches render errors and displays fallback UI with try again action', () => {
+    // Suppress console.error log output from vitest for expected throw
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
-    expect(newState.hasError).toBe(true);
-    expect(newState.error).toBe(error);
+    render(
+      <DashboardErrorBoundary>
+        <ProblemChild />
+      </DashboardErrorBoundary>,
+    );
+
+    expect(screen.getByText('Dashboard View Error')).toBeInTheDocument();
+    expect(screen.getByText('Component crashed during render!')).toBeInTheDocument();
+
+    const tryAgainBtn = screen.getByRole('button', { name: 'Try Again' });
+    expect(tryAgainBtn).toBeInTheDocument();
+
+    consoleSpy.mockRestore();
   });
 });

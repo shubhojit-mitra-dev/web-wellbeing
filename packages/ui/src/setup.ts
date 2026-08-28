@@ -1,2 +1,1 @@
-import './chrome-mock';
 import '@testing-library/jest-dom';
