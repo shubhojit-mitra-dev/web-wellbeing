@@ -21,7 +21,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const baseStyles =
-      'inline-flex items-center justify-center rounded-lg text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] cursor-pointer';
+      'inline-flex flex-row items-center justify-center whitespace-nowrap shrink-0 rounded-xl text-sm font-medium leading-none transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] cursor-pointer';
 
     const variantStyles = {
       default:
@@ -37,10 +37,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const sizeStyles = {
-      default: 'h-10 px-4 py-2',
-      sm: 'h-8 px-3 text-xs',
-      lg: 'h-12 px-6 text-base',
-      icon: 'h-10 w-10 p-0',
+      default: 'h-10 px-4 py-2 gap-2',
+      sm: 'h-8 px-3 text-xs gap-1.5',
+      lg: 'h-12 px-6 text-base gap-2.5',
+      icon: 'h-10 w-10 p-0 justify-center',
     };
 
     return (
@@ -52,7 +52,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {isLoading && (
           <svg
-            className="mr-2 h-4 w-4 animate-spin"
+            className="h-4 w-4 shrink-0 animate-spin"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
