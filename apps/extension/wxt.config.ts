@@ -6,6 +6,9 @@ export default defineConfig({
   extensionApi: 'chrome',
   modules: ['@wxt-dev/module-react'],
   srcDir: 'src',
+  runner: {
+    disabled: true,
+  },
   vite: () => ({
     plugins: [tailwindcss()],
   }),
