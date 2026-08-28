@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   codeql-sast:
-    name: 🛡️ CodeQL SAST Analysis
+    name: CodeQL SAST Analysis
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
