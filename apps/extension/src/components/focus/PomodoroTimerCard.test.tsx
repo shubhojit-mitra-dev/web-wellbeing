@@ -7,7 +7,7 @@ import { useFocusStore } from '../../stores/use-focus-store';
 describe('PomodoroTimerCard component suite', () => {
   it('renders timer card in inactive state with default time', () => {
     render(<PomodoroTimerCard />);
-    expect(screen.getByText('Focus Session')).toBeInTheDocument();
+    expect(screen.getByText('Focus Timer')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /start focus/i })).toBeInTheDocument();
   });
 
