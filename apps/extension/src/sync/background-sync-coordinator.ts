@@ -1,5 +1,5 @@
 import type { ActivityRecord } from '@web-wellbeing/shared';
-import type { IActivityRepository } from '@web-wellbeing/supabase';
+import type { IActivityRepository } from '@web-wellbeing/shared';
 
 const STORAGE_KEY = 'wellbeing_offline_sync_queue';
 
