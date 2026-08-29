@@ -1,5 +1,11 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
+/**
+ * Safe environment variable accessor.
+ * Reads from Vite's import.meta.env (browser/extension context) or process.env
+ * (Node/test context). Does NOT reference document or window — safe for use in
+ * Chrome Extension Service Workers.
+ */
 const getEnvVar = (key: string, defaultValue: string): string => {
   const meta = import.meta as unknown as { env?: Record<string, string> };
   if (meta && meta.env && meta.env[key]) {
@@ -22,11 +28,7 @@ let clientInstance: SupabaseClient | null = null;
  * default cookie-based session storage would crash. We use a no-op in-memory
  * storage instead so the client can be safely instantiated in that context.
  */
-const isServiceWorker =
-  typeof window === 'undefined' &&
-  typeof document === 'undefined' &&
-  typeof self !== 'undefined' &&
-  typeof (self as unknown as Record<string, unknown>).ServiceWorkerGlobalScope !== 'undefined';
+const isServiceWorkerContext = typeof window === 'undefined' && typeof document === 'undefined';
 
 /** Minimal in-memory storage that satisfies the Supabase Storage interface. */
 const memoryStorage = (() => {
@@ -57,10 +59,10 @@ export function getSupabaseClient(url = SUPABASE_URL, anonKey = SUPABASE_ANON_KE
   if (!clientInstance) {
     clientInstance = createClient(url, anonKey, {
       auth: {
-        persistSession: !isServiceWorker,
-        autoRefreshToken: !isServiceWorker,
+        persistSession: !isServiceWorkerContext,
+        autoRefreshToken: !isServiceWorkerContext,
         detectSessionInUrl: false,
-        ...(isServiceWorker ? { storage: memoryStorage } : {}),
+        ...(isServiceWorkerContext ? { storage: memoryStorage } : {}),
       },
     });
   }
