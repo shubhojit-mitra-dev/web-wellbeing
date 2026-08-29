@@ -21,26 +21,26 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const baseStyles =
-      'inline-flex flex-row items-center justify-center whitespace-nowrap shrink-0 rounded-xl text-sm font-medium leading-none transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] cursor-pointer';
+      'inline-flex flex-row items-center justify-center whitespace-nowrap shrink-0 rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#cc785c] disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] cursor-pointer';
 
     const variantStyles = {
       default:
-        'bg-emerald-600 text-white hover:bg-emerald-500 shadow-md shadow-emerald-900/20 dark:bg-emerald-500 dark:hover:bg-emerald-400 dark:text-zinc-950',
-      destructive: 'bg-red-600 text-white hover:bg-red-500 shadow-md shadow-red-900/20',
+        'bg-[#cc785c] text-white hover:bg-[#a9583e] active:bg-[#a9583e] shadow-sm font-medium',
+      destructive: 'bg-[#c64545] text-white hover:bg-[#b03a3a] active:bg-[#9a3030]',
       outline:
-        'border border-zinc-200 dark:border-zinc-800 bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100',
+        'border border-[#e6dfd8] dark:border-[#2d2b27] bg-transparent hover:bg-[#efe9de]/60 dark:hover:bg-[#252320] text-[#141413] dark:text-[#faf9f5]',
       secondary:
-        'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-700',
+        'bg-[#efe9de] dark:bg-[#252320] text-[#141413] dark:text-[#faf9f5] hover:bg-[#e8e0d2] dark:hover:bg-[#2d2b27] border border-[#e6dfd8] dark:border-[#2d2b27]',
       ghost:
-        'bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800/60 text-zinc-700 dark:text-zinc-300',
-      link: 'text-emerald-600 dark:text-emerald-400 underline-offset-4 hover:underline p-0 h-auto',
+        'bg-transparent hover:bg-[#efe9de]/60 dark:hover:bg-[#252320] text-[#3d3d3a] dark:text-[#a09d96]',
+      link: 'text-[#cc785c] underline-offset-4 hover:underline p-0 h-auto font-medium',
     };
 
     const sizeStyles = {
       default: 'h-10 px-4 py-2 gap-2',
       sm: 'h-8 px-3 text-xs gap-1.5',
       lg: 'h-12 px-6 text-base gap-2.5',
-      icon: 'h-10 w-10 p-0 justify-center',
+      icon: 'h-10 w-10 p-0 justify-center rounded-full',
     };
 
     return (
