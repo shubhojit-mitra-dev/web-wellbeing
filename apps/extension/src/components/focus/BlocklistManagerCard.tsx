@@ -22,39 +22,41 @@ export function BlocklistManagerCard() {
   };
 
   return (
-    <Card className="relative overflow-hidden border-zinc-200/80 dark:border-zinc-800/80 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl">
-      <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="flex items-center gap-2 text-base font-bold text-zinc-900 dark:text-zinc-100">
-          <Shield className="h-5 w-5 text-purple-500" />
+    <Card className="relative overflow-hidden border border-hairline dark:border-hairline-dark bg-surface-card/50 dark:bg-surface-dark rounded-xl shadow-sm">
+      <CardHeader className="flex flex-row items-center justify-between pb-2 border-b border-hairline/60 dark:border-hairline-dark/60 px-6 py-4">
+        <CardTitle className="flex items-center gap-2.5 text-lg font-serif font-normal tracking-tight text-ink dark:text-on-dark">
+          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10 text-primary">
+            <Shield className="h-4 w-4 fill-current" />
+          </div>
           <span>Distraction Blocklist</span>
         </CardTitle>
         <Badge
           variant="outline"
-          className="text-purple-600 dark:text-purple-400 border-purple-500/30"
+          className="text-primary dark:text-primary border-primary/30 font-medium"
         >
           {blockedDomains.length} Domains
         </Badge>
       </CardHeader>
 
-      <CardContent className="space-y-4 pt-2">
+      <CardContent className="space-y-4 p-6">
         {/* Input Form */}
         <div className="flex gap-2">
           <div className="relative flex-1">
-            <Globe className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
+            <Globe className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-soft" />
             <input
               type="text"
               value={newDomain}
               onChange={(e) => setNewDomain(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Add domain (e.g. reddit.com)..."
-              className="w-full rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60 pl-9 pr-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-purple-500/40"
+              className="w-full rounded-md border border-hairline dark:border-hairline-dark bg-canvas dark:bg-surface-dark-elevated pl-9 pr-3 py-2 text-sm text-ink dark:text-on-dark placeholder:text-muted-soft focus:outline-none focus:ring-2 focus:ring-primary/40"
             />
           </div>
           <Button
             variant="default"
             size="sm"
             onClick={handleAdd}
-            className="gap-1 bg-purple-600 hover:bg-purple-500 text-white rounded-xl"
+            className="gap-1 bg-primary hover:bg-primary-active text-white rounded-md font-medium"
           >
             <Plus className="h-4 w-4" />
             <span>Add</span>
@@ -66,12 +68,12 @@ export function BlocklistManagerCard() {
           {blockedDomains.map((domain) => (
             <div
               key={domain}
-              className="group flex items-center gap-1.5 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/80 dark:bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-800 dark:text-zinc-200 transition-colors hover:border-purple-500/40"
+              className="group flex items-center gap-1.5 rounded-md border border-hairline dark:border-hairline-dark bg-canvas dark:bg-surface-dark-elevated px-3 py-1.5 text-xs font-medium text-body dark:text-on-dark transition-colors hover:border-primary/40"
             >
               <span>{domain}</span>
               <button
                 onClick={() => removeBlockedDomain(domain)}
-                className="rounded-full p-0.5 text-zinc-400 hover:bg-red-500/20 hover:text-red-500 transition-colors"
+                className="rounded-full p-0.5 text-muted-soft hover:bg-red-500/10 hover:text-red-500 transition-colors"
                 aria-label={`Remove ${domain}`}
               >
                 <X className="h-3.5 w-3.5" />

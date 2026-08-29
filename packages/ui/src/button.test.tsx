@@ -36,13 +36,13 @@ describe('Button component suite', () => {
 
   it('applies variant classes correctly', () => {
     const { rerender } = render(<Button variant="default">Default</Button>);
-    expect(screen.getByRole('button')).toHaveClass('bg-emerald-600');
+    expect(screen.getByRole('button')).toHaveClass('bg-primary');
 
     rerender(<Button variant="destructive">Delete</Button>);
     expect(screen.getByRole('button')).toHaveClass('bg-red-600');
 
     rerender(<Button variant="outline">Outline</Button>);
-    expect(screen.getByRole('button')).toHaveClass('border-zinc-200');
+    expect(screen.getByRole('button')).toHaveClass('border-hairline');
   });
 
   it('applies size classes correctly', () => {

@@ -13,22 +13,22 @@ export function DashboardLayout() {
 
   return (
     <div
-      className={`h-screen w-screen flex overflow-hidden font-sans antialiased select-none ${
-        theme === 'dark' ? 'dark bg-zinc-950 text-zinc-100' : 'bg-zinc-50 text-zinc-900'
+      className={`h-screen w-screen min-h-screen flex overflow-hidden font-sans antialiased select-none ${
+        theme === 'dark' ? 'dark bg-surface-dark text-on-dark' : 'bg-canvas text-ink'
       }`}
     >
-      {/* Background Subtle Mesh */}
-      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-900/10 via-transparent to-transparent dark:from-emerald-950/20" />
+      {/* Background Atmosphere Tint */}
+      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent dark:from-primary/10" />
 
       {/* Static Fixed Sidebar Navigation */}
       <SidebarNav />
 
-      {/* Main Right Area - Header + Scrollable Content */}
+      {/* Main Content Area */}
       <div className="flex flex-1 flex-col h-full overflow-hidden min-w-0">
         <HeaderBar />
 
-        {/* Page Content Outlet (Only this container scrolls) */}
-        <main className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 max-w-7xl w-full mx-auto">
+        {/* Scrollable Page Container */}
+        <main className="flex-1 overflow-y-auto p-6 md:p-10 space-y-8 max-w-7xl w-full mx-auto">
           <Outlet />
         </main>
       </div>

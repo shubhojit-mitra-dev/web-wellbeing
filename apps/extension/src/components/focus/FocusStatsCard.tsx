@@ -1,37 +1,39 @@
-import { Flame, ShieldAlert, CheckCircle2 } from 'lucide-react';
+import { Zap, CheckCircle2, AlertTriangle } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from '@web-wellbeing/ui';
 import { useFocusStore } from '../../stores/use-focus-store';
 
 export function FocusStatsCard() {
-  const { interruptionCount, completedCycles } = useFocusStore();
+  const { completedCycles, interruptionCount } = useFocusStore();
 
   return (
-    <Card className="relative overflow-hidden border-zinc-200/80 dark:border-zinc-800/80 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl">
-      <CardHeader className="pb-2">
-        <CardTitle className="flex items-center gap-2 text-base font-bold text-zinc-900 dark:text-zinc-100">
-          <Flame className="h-5 w-5 text-amber-500" />
+    <Card className="relative overflow-hidden border border-hairline dark:border-hairline-dark bg-surface-card/50 dark:bg-surface-dark rounded-xl shadow-sm">
+      <CardHeader className="flex flex-row items-center justify-between pb-2 border-b border-hairline/60 dark:border-hairline-dark/60 px-6 py-4">
+        <CardTitle className="flex items-center gap-2.5 text-lg font-serif font-normal tracking-tight text-ink dark:text-on-dark">
+          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10 text-primary">
+            <Zap className="h-4 w-4 fill-current" />
+          </div>
           <span>Focus Overview</span>
         </CardTitle>
       </CardHeader>
 
-      <CardContent className="grid grid-cols-2 gap-4 pt-2">
-        <div className="rounded-xl border border-zinc-100 dark:border-zinc-800/60 bg-zinc-50/50 dark:bg-zinc-900/40 p-4 text-center">
-          <div className="flex items-center justify-center gap-1.5 text-zinc-500 dark:text-zinc-400 text-xs mb-1">
-            <ShieldAlert className="h-4 w-4 text-rose-500" />
-            <span>Interruption Attempts</span>
+      <CardContent className="grid grid-cols-2 gap-4 p-6">
+        <div className="flex flex-col rounded-md border border-hairline dark:border-hairline-dark bg-canvas dark:bg-surface-dark-elevated p-4 text-center">
+          <div className="flex items-center justify-center gap-1.5 text-xs font-medium text-muted dark:text-on-dark-soft">
+            <CheckCircle2 className="h-4 w-4 text-accent-teal" />
+            <span>Completed Sessions</span>
           </div>
-          <div className="text-3xl font-extrabold text-zinc-900 dark:text-zinc-50">
-            {interruptionCount}
+          <div className="mt-2 font-mono text-3xl font-bold text-ink dark:text-on-dark">
+            {completedCycles}
           </div>
         </div>
 
-        <div className="rounded-xl border border-zinc-100 dark:border-zinc-800/60 bg-zinc-50/50 dark:bg-zinc-900/40 p-4 text-center">
-          <div className="flex items-center justify-center gap-1.5 text-zinc-500 dark:text-zinc-400 text-xs mb-1">
-            <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-            <span>Completed Sessions</span>
+        <div className="flex flex-col rounded-md border border-hairline dark:border-hairline-dark bg-canvas dark:bg-surface-dark-elevated p-4 text-center">
+          <div className="flex items-center justify-center gap-1.5 text-xs font-medium text-muted dark:text-on-dark-soft">
+            <AlertTriangle className="h-4 w-4 text-accent-amber" />
+            <span>Interruption Attempts</span>
           </div>
-          <div className="text-3xl font-extrabold text-zinc-900 dark:text-zinc-50">
-            {completedCycles}
+          <div className="mt-2 font-mono text-3xl font-bold text-ink dark:text-on-dark">
+            {interruptionCount}
           </div>
         </div>
       </CardContent>

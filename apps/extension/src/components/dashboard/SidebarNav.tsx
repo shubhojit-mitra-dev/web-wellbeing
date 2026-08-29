@@ -24,41 +24,41 @@ export function SidebarNav() {
 
   return (
     <aside
-      className={`relative flex flex-col shrink-0 border-r border-zinc-200/80 dark:border-zinc-800/80 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl transition-all duration-300 ease-in-out ${
+      className={`relative flex flex-col shrink-0 border-r border-hairline dark:border-hairline-dark bg-canvas dark:bg-surface-dark transition-all duration-300 ease-in-out ${
         sidebarCollapsed ? 'w-20' : 'w-64'
       }`}
     >
-      {/* Brand Header */}
-      <div className="flex h-16 items-center border-b border-zinc-200/60 dark:border-zinc-800/60 px-4">
+      {/* Brand Header with Anthropic Asterisk Glyph */}
+      <div className="flex h-16 items-center border-b border-hairline dark:border-hairline-dark px-4">
         {sidebarCollapsed ? (
           <div className="flex w-full items-center justify-center">
             <button
               onClick={toggleSidebar}
-              className="group flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 text-white font-bold text-lg shadow-md shadow-emerald-900/30 hover:scale-105 transition-transform"
+              className="group flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white font-bold text-lg shadow-sm hover:bg-primary-active transition-colors"
               title="Expand sidebar"
             >
-              <span className="group-hover:hidden">W</span>
+              <span className="group-hover:hidden">✳</span>
               <ChevronRight className="hidden group-hover:block h-5 w-5" />
             </button>
           </div>
         ) : (
           <div className="flex w-full items-center justify-between">
             <div className="flex items-center gap-3 overflow-hidden">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 text-white font-bold text-lg shadow-md shadow-emerald-900/30">
-                W
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-white font-bold text-base shadow-sm">
+                ✳
               </div>
               <div className="flex flex-col min-w-0">
-                <span className="font-bold text-sm tracking-tight text-zinc-900 dark:text-zinc-100 truncate">
+                <span className="font-serif text-base font-normal tracking-tight text-ink dark:text-on-dark truncate">
                   Web Wellbeing
                 </span>
-                <span className="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium">
-                  Dashboard v1.0
+                <span className="text-[10px] text-muted dark:text-on-dark-soft font-medium tracking-wider uppercase">
+                  Anthropic OS
                 </span>
               </div>
             </div>
             <button
               onClick={toggleSidebar}
-              className="rounded-lg p-1.5 text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors shrink-0"
+              className="rounded-md p-1.5 text-muted hover:bg-surface-card dark:hover:bg-surface-dark-elevated hover:text-ink dark:hover:text-on-dark transition-colors shrink-0"
               title="Collapse sidebar"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -77,16 +77,16 @@ export function SidebarNav() {
               to={item.path}
               title={sidebarCollapsed ? item.label : undefined}
               className={({ isActive }) =>
-                `flex items-center rounded-xl text-sm font-medium transition-all ${
+                `flex items-center rounded-md text-sm font-medium transition-all ${
                   sidebarCollapsed ? 'justify-center p-3' : 'gap-3 px-3.5 py-2.5'
                 } ${
                   isActive
-                    ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 dark:bg-emerald-950/50 shadow-sm border border-emerald-500/30'
-                    : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900/80 hover:text-zinc-900 dark:hover:text-zinc-200'
+                    ? 'bg-surface-card dark:bg-surface-dark-elevated text-ink dark:text-on-dark border-l-2 border-primary font-semibold'
+                    : 'text-muted dark:text-on-dark-soft hover:bg-surface-card/50 dark:hover:bg-surface-dark-elevated/50 hover:text-ink dark:hover:text-on-dark'
                 }`
               }
             >
-              <Icon className="h-5 w-5 shrink-0" />
+              <Icon className="h-4 w-4 shrink-0" />
               {!sidebarCollapsed && <span className="truncate">{item.label}</span>}
             </NavLink>
           );
@@ -95,13 +95,13 @@ export function SidebarNav() {
 
       {/* Extension Footer Badge */}
       {!sidebarCollapsed && (
-        <div className="p-4 m-3 rounded-xl border border-emerald-500/20 bg-emerald-500/5 dark:bg-emerald-950/20">
-          <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+        <div className="p-4 m-3 rounded-lg border border-hairline dark:border-hairline-dark bg-surface-card/50 dark:bg-surface-dark-soft">
+          <div className="flex items-center gap-2 text-xs font-semibold text-primary">
             <ShieldCheck className="h-4 w-4 shrink-0" />
             <span>Local Privacy First</span>
           </div>
-          <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400 leading-relaxed">
-            All raw web usage logs stored locally.
+          <p className="mt-1 text-[11px] text-muted dark:text-on-dark-soft leading-relaxed">
+            All web activity logs stay strictly local on device.
           </p>
         </div>
       )}
