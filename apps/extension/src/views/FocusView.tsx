@@ -4,12 +4,12 @@ import { FocusStatsCard } from '../components/focus/FocusStatsCard';
 
 export default function FocusView() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+        <h1 className="font-serif text-3xl md:text-4xl font-normal tracking-tight text-[#141413] dark:text-[#faf9f5]">
           Focus Mode & Pomodoro Timer
         </h1>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
+        <p className="text-sm text-[#6c6a64] dark:text-[#a09d96] mt-1.5">
           Configure focus sessions, website blocklists, and break schedules.
         </p>
       </div>
