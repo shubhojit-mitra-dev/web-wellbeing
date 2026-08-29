@@ -16,6 +16,32 @@ const SUPABASE_ANON_KEY = getEnvVar('VITE_SUPABASE_ANON_KEY', 'placeholder-anon-
 
 let clientInstance: SupabaseClient | null = null;
 
+/**
+ * Detect whether we are running inside a Chrome Extension Service Worker.
+ * Service workers have no `window` or `document` globals, so Supabase's
+ * default cookie-based session storage would crash. We use a no-op in-memory
+ * storage instead so the client can be safely instantiated in that context.
+ */
+const isServiceWorker =
+  typeof window === 'undefined' &&
+  typeof document === 'undefined' &&
+  typeof self !== 'undefined' &&
+  typeof (self as unknown as Record<string, unknown>).ServiceWorkerGlobalScope !== 'undefined';
+
+/** Minimal in-memory storage that satisfies the Supabase Storage interface. */
+const memoryStorage = (() => {
+  const store = new Map<string, string>();
+  return {
+    getItem: (key: string) => store.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      store.set(key, value);
+    },
+    removeItem: (key: string) => {
+      store.delete(key);
+    },
+  };
+})();
+
 if (typeof globalThis.WebSocket === 'undefined') {
   class DummyWebSocket {
     static readonly CONNECTING = 0;
@@ -31,9 +57,10 @@ export function getSupabaseClient(url = SUPABASE_URL, anonKey = SUPABASE_ANON_KE
   if (!clientInstance) {
     clientInstance = createClient(url, anonKey, {
       auth: {
-        persistSession: true,
-        autoRefreshToken: true,
+        persistSession: !isServiceWorker,
+        autoRefreshToken: !isServiceWorker,
         detectSessionInUrl: false,
+        ...(isServiceWorker ? { storage: memoryStorage } : {}),
       },
     });
   }
