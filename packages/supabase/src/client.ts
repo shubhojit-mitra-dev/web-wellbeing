@@ -17,8 +17,12 @@ const getEnvVar = (key: string, defaultValue: string): string => {
   return defaultValue;
 };
 
-const SUPABASE_URL = getEnvVar('VITE_SUPABASE_URL', 'https://placeholder-url.supabase.co');
-const SUPABASE_ANON_KEY = getEnvVar('VITE_SUPABASE_ANON_KEY', 'placeholder-anon-key');
+const DEFAULT_URL = 'https://wzqmneutvtkdylvelmqc.supabase.co';
+const DEFAULT_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6cW1uZXV0dnRrZHlsdmVsbXFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc5OTMyNjIsImV4cCI6MjEwMzU2OTI2Mn0.2csz1LHPYnVIxb8ZN3Is6c6ZMh8frTAWJCg1N-M-6Fo';
+
+const SUPABASE_URL = getEnvVar('VITE_SUPABASE_URL', DEFAULT_URL);
+const SUPABASE_ANON_KEY = getEnvVar('VITE_SUPABASE_ANON_KEY', DEFAULT_ANON_KEY);
 
 let clientInstance: SupabaseClient | null = null;
 
