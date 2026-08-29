@@ -1,10 +1,7 @@
-import type { ActivityRecord } from '@web-wellbeing/shared';
+import type { ActivityRecord, IActivityRepository } from '@web-wellbeing/shared';
 import { getSupabaseClient } from '../client';
 
-export interface IActivityRepository {
-  insertBatch(activities: readonly ActivityRecord[]): Promise<void>;
-  getByDateRange(startDate: string, endDate: string): Promise<ActivityRecord[]>;
-}
+export type { IActivityRepository };
 
 export class SupabaseActivityRepository implements IActivityRepository {
   public async insertBatch(activities: readonly ActivityRecord[]): Promise<void> {
