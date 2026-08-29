@@ -16,9 +16,13 @@ export default function AnalyticsView() {
         <CardHeader>
           <CardTitle>Historical Usage Trends</CardTitle>
         </CardHeader>
-        <CardContent className="h-72 flex items-center justify-center border-t border-zinc-200/60 dark:border-zinc-800/60 mt-4">
-          <p className="text-sm text-zinc-400 dark:text-zinc-500">
-            Recharts analytics components will be mounted here in Phase 17
+        <CardContent className="h-72 flex flex-col items-center justify-center border-t border-zinc-200/60 dark:border-zinc-800/60 mt-4 text-center px-4">
+          <p className="text-sm font-medium text-zinc-600 dark:text-zinc-300">
+            Interactive Analytics & Usage Visualizations
+          </p>
+          <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1 max-w-md">
+            View detailed historical screen-time graphs, domain breakdowns, and category
+            productivity heatmaps.
           </p>
         </CardContent>
       </Card>

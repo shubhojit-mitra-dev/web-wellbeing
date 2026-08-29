@@ -14,11 +14,15 @@ export default function GoalsView() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Daily Targets & Streak Tracker</CardTitle>
+          <CardTitle>Daily Targets & Habit Streaks</CardTitle>
         </CardHeader>
-        <CardContent className="h-72 flex items-center justify-center border-t border-zinc-200/60 dark:border-zinc-800/60 mt-4">
-          <p className="text-sm text-zinc-400 dark:text-zinc-500">
-            Goal setting and habit streak tracking components will be mounted here in Phase 14
+        <CardContent className="h-72 flex flex-col items-center justify-center border-t border-zinc-200/60 dark:border-zinc-800/60 mt-4 text-center px-4">
+          <p className="text-sm font-medium text-zinc-600 dark:text-zinc-300">
+            Goal Configuration & Habit Streak Tracking Module
+          </p>
+          <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1 max-w-md">
+            Define daily browsing limits by category, monitor your progress in real-time, and build
+            consistent focus streaks.
           </p>
         </CardContent>
       </Card>

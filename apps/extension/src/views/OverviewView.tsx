@@ -85,7 +85,7 @@ export default function OverviewView() {
           </CardHeader>
           <CardContent className="h-64 flex items-center justify-center border-t border-zinc-200/60 dark:border-zinc-800/60 mt-4">
             <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-              Chart component will be mounted here in Phase 17
+              Hourly activity chart visualization
             </p>
           </CardContent>
         </Card>
