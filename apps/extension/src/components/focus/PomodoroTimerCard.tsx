@@ -19,11 +19,11 @@ export function PomodoroTimerCard() {
   const presetDurations = [15, 25, 45, 60];
 
   return (
-    <Card className="relative overflow-hidden border border-[#e6dfd8] dark:border-[#2d2b27] bg-[#efe9de]/50 dark:bg-[#181715] rounded-xl shadow-sm">
+    <Card className="relative overflow-hidden border border-hairline dark:border-hairline-dark bg-surface-card/50 dark:bg-surface-dark rounded-xl shadow-sm">
       {/* Top Header Row */}
-      <CardHeader className="flex flex-row items-center justify-between pb-2 border-b border-[#e6dfd8]/60 dark:border-[#2d2b27]/60 px-6 py-4">
-        <CardTitle className="flex items-center gap-2.5 text-lg font-serif font-normal tracking-tight text-[#141413] dark:text-[#faf9f5]">
-          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#cc785c]/10 text-[#cc785c]">
+      <CardHeader className="flex flex-row items-center justify-between pb-2 border-b border-hairline/60 dark:border-hairline-dark/60 px-6 py-4">
+        <CardTitle className="flex items-center gap-2.5 text-lg font-serif font-normal tracking-tight text-ink dark:text-on-dark">
+          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10 text-primary">
             <Zap className="h-4 w-4 fill-current" />
           </div>
           <span>Focus Timer</span>
@@ -33,19 +33,19 @@ export function PomodoroTimerCard() {
         <div
           className={`flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium border ${
             focusState === 'active'
-              ? 'bg-[#cc785c]/10 text-[#cc785c] border-[#cc785c]/30'
+              ? 'bg-primary/10 text-primary border-primary/30'
               : focusState === 'paused'
-                ? 'bg-[#e8a55a]/10 text-[#e8a55a] border-[#e8a55a]/30'
-                : 'bg-[#faf9f5] text-[#6c6a64] dark:bg-[#252320] dark:text-[#a09d96] border-[#e6dfd8] dark:border-[#2d2b27]'
+                ? 'bg-accent-amber/10 text-accent-amber border-accent-amber/30'
+                : 'bg-canvas text-muted dark:bg-surface-dark-elevated dark:text-on-dark-soft border-hairline dark:border-hairline-dark'
           }`}
         >
           <span
             className={`h-2 w-2 rounded-full ${
               focusState === 'active'
-                ? 'bg-[#cc785c] animate-pulse'
+                ? 'bg-primary animate-pulse'
                 : focusState === 'paused'
-                  ? 'bg-[#e8a55a]'
-                  : 'bg-[#8e8b82]'
+                  ? 'bg-accent-amber'
+                  : 'bg-muted-soft'
             }`}
           />
           <span>
@@ -61,22 +61,22 @@ export function PomodoroTimerCard() {
       <CardContent className="space-y-6 p-8 text-center">
         {/* Large Display Timer in JetBrains Mono / Serif Mix */}
         <div className="py-3">
-          <div className="font-mono text-7xl font-semibold tracking-tight text-[#141413] dark:text-[#faf9f5]">
+          <div className="font-mono text-7xl font-semibold tracking-tight text-ink dark:text-on-dark">
             {formattedTime}
           </div>
         </div>
 
         {/* Segmented Preset Duration Selector */}
         {focusState === 'inactive' && (
-          <div className="mx-auto flex max-w-xs items-center justify-center gap-1 rounded-md bg-[#faf9f5] p-1.5 dark:bg-[#252320] border border-[#e6dfd8] dark:border-[#2d2b27]">
+          <div className="mx-auto flex max-w-xs items-center justify-center gap-1 rounded-md bg-canvas p-1.5 dark:bg-surface-dark-elevated border border-hairline dark:border-hairline-dark">
             {presetDurations.map((duration) => (
               <button
                 key={duration}
                 onClick={() => setPlannedDurationMinutes(duration)}
                 className={`flex-1 rounded-sm py-1.5 text-xs font-medium transition-all duration-200 ${
                   plannedDurationMinutes === duration
-                    ? 'bg-[#cc785c] text-white shadow-sm font-semibold'
-                    : 'text-[#6c6a64] hover:text-[#141413] dark:text-[#a09d96] dark:hover:text-[#faf9f5]'
+                    ? 'bg-primary text-white shadow-sm font-semibold'
+                    : 'text-muted hover:text-ink dark:text-on-dark-soft dark:hover:text-on-dark'
                 }`}
               >
                 {duration}m
@@ -91,7 +91,7 @@ export function PomodoroTimerCard() {
             <Button
               variant="default"
               size="lg"
-              className="gap-2.5 rounded-md px-8 py-3 bg-[#cc785c] hover:bg-[#a9583e] text-white font-medium shadow-sm transition-all duration-200 hover:scale-105 active:scale-95 border-0"
+              className="gap-2.5 rounded-md px-8 py-3 bg-primary hover:bg-primary-active text-white font-medium shadow-sm transition-all duration-200 hover:scale-105 active:scale-95 border-0"
               onClick={() => setFocusState('active')}
             >
               <Play className="h-4 w-4 fill-current" />
@@ -104,7 +104,7 @@ export function PomodoroTimerCard() {
               <Button
                 variant="outline"
                 size="lg"
-                className="gap-2 rounded-md px-6 py-3 border-[#e6dfd8] dark:border-[#2d2b27] font-medium"
+                className="gap-2 rounded-md px-6 py-3 border-hairline dark:border-hairline-dark font-medium"
                 onClick={() => setFocusState('paused')}
               >
                 <Pause className="h-4 w-4" />
@@ -114,7 +114,7 @@ export function PomodoroTimerCard() {
               <Button
                 variant="destructive"
                 size="lg"
-                className="gap-2 rounded-md px-6 py-3 font-medium bg-[#c64545] hover:bg-[#b03a3a]"
+                className="gap-2 rounded-md px-6 py-3 font-medium bg-red-600 hover:bg-red-700"
                 onClick={() => setFocusState('inactive')}
               >
                 <Square className="h-4 w-4 fill-current" />
@@ -128,7 +128,7 @@ export function PomodoroTimerCard() {
               <Button
                 variant="default"
                 size="lg"
-                className="gap-2 rounded-md px-6 py-3 bg-[#cc785c] hover:bg-[#a9583e] text-white font-medium"
+                className="gap-2 rounded-md px-6 py-3 bg-primary hover:bg-primary-active text-white font-medium"
                 onClick={() => setFocusState('active')}
               >
                 <Play className="h-4 w-4 fill-current" />
@@ -138,7 +138,7 @@ export function PomodoroTimerCard() {
               <Button
                 variant="destructive"
                 size="lg"
-                className="gap-2 rounded-md px-6 py-3 font-medium bg-[#c64545] hover:bg-[#b03a3a]"
+                className="gap-2 rounded-md px-6 py-3 font-medium bg-red-600 hover:bg-red-700"
                 onClick={() => setFocusState('inactive')}
               >
                 <Square className="h-4 w-4 fill-current" />
@@ -149,8 +149,8 @@ export function PomodoroTimerCard() {
         </div>
 
         {/* Footer Subtext */}
-        <p className="flex items-center justify-center gap-1.5 text-xs text-[#6c6a64] dark:text-[#a09d96] pt-2">
-          <Coffee className="h-3.5 w-3.5 text-[#e8a55a]" />
+        <p className="flex items-center justify-center gap-1.5 text-xs text-muted dark:text-on-dark-soft pt-2">
+          <Coffee className="h-3.5 w-3.5 text-accent-amber" />
           <span>Distraction blocklist automatically enforced during active focus sessions.</span>
         </p>
       </CardContent>

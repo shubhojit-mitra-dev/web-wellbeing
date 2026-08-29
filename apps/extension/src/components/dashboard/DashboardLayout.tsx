@@ -13,12 +13,12 @@ export function DashboardLayout() {
 
   return (
     <div
-      className={`h-screen w-screen flex overflow-hidden font-sans antialiased select-none ${
-        theme === 'dark' ? 'dark bg-[#181715] text-[#faf9f5]' : 'bg-[#faf9f5] text-[#141413]'
+      className={`h-screen w-screen min-h-screen flex overflow-hidden font-sans antialiased select-none ${
+        theme === 'dark' ? 'dark bg-surface-dark text-on-dark' : 'bg-canvas text-ink'
       }`}
     >
       {/* Background Atmosphere Tint */}
-      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#cc785c]/5 via-transparent to-transparent dark:from-[#cc785c]/10" />
+      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent dark:from-primary/10" />
 
       {/* Static Fixed Sidebar Navigation */}
       <SidebarNav />

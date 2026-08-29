@@ -21,19 +21,19 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const baseStyles =
-      'inline-flex flex-row items-center justify-center whitespace-nowrap shrink-0 rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#cc785c] disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] cursor-pointer';
+      'inline-flex flex-row items-center justify-center whitespace-nowrap shrink-0 rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] cursor-pointer';
 
     const variantStyles = {
       default:
-        'bg-[#cc785c] text-white hover:bg-[#a9583e] active:bg-[#a9583e] shadow-sm font-medium',
-      destructive: 'bg-[#c64545] text-white hover:bg-[#b03a3a] active:bg-[#9a3030]',
+        'bg-primary text-white hover:bg-primary-active active:bg-primary-active shadow-sm font-medium',
+      destructive: 'bg-red-600 text-white hover:bg-red-700 active:bg-red-800',
       outline:
-        'border border-[#e6dfd8] dark:border-[#2d2b27] bg-transparent hover:bg-[#efe9de]/60 dark:hover:bg-[#252320] text-[#141413] dark:text-[#faf9f5]',
+        'border border-hairline dark:border-hairline-dark bg-transparent hover:bg-surface-card/60 dark:hover:bg-surface-dark-elevated text-ink dark:text-on-dark',
       secondary:
-        'bg-[#efe9de] dark:bg-[#252320] text-[#141413] dark:text-[#faf9f5] hover:bg-[#e8e0d2] dark:hover:bg-[#2d2b27] border border-[#e6dfd8] dark:border-[#2d2b27]',
+        'bg-surface-card dark:bg-surface-dark-elevated text-ink dark:text-on-dark hover:bg-surface-cream-strong dark:hover:bg-hairline-dark border border-hairline dark:border-hairline-dark',
       ghost:
-        'bg-transparent hover:bg-[#efe9de]/60 dark:hover:bg-[#252320] text-[#3d3d3a] dark:text-[#a09d96]',
-      link: 'text-[#cc785c] underline-offset-4 hover:underline p-0 h-auto font-medium',
+        'bg-transparent hover:bg-surface-card/60 dark:hover:bg-surface-dark-elevated text-body dark:text-muted-soft',
+      link: 'text-primary underline-offset-4 hover:underline p-0 h-auto font-medium',
     };
 
     const sizeStyles = {

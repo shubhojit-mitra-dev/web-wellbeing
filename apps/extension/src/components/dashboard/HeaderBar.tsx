@@ -8,13 +8,13 @@ export function HeaderBar() {
   const navigate = useNavigate();
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-[#e6dfd8] dark:border-[#2d2b27] bg-[#faf9f5]/95 dark:bg-[#181715]/95 backdrop-blur-xl px-6 shrink-0">
+    <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-hairline dark:border-hairline-dark bg-canvas/95 dark:bg-surface-dark/95 backdrop-blur-xl px-6 shrink-0">
       {/* Live Engine Status */}
       <div className="flex items-center gap-4">
         <StatusIndicator active label="Tracking Engine Active" />
-        <span className="h-4 w-px bg-[#e6dfd8] dark:bg-[#2d2b27]" />
-        <span className="text-xs text-[#6c6a64] dark:text-[#a09d96] font-medium">
-          Sync Status: <span className="text-[#5db8a6] font-semibold">Online & Synced</span>
+        <span className="h-4 w-px bg-hairline dark:bg-hairline-dark" />
+        <span className="text-xs text-muted dark:text-on-dark-soft font-medium">
+          Sync Status: <span className="text-accent-teal font-semibold">Online & Synced</span>
         </span>
       </div>
 
@@ -23,7 +23,7 @@ export function HeaderBar() {
         {/* Coral Quick Focus Action Button */}
         <button
           onClick={() => navigate('/focus')}
-          className="flex h-9 w-9 items-center justify-center rounded-full bg-[#cc785c] hover:bg-[#a9583e] text-white shadow-sm transition-all duration-200 hover:scale-105 active:scale-95"
+          className="flex h-9 w-9 items-center justify-center rounded-full bg-primary hover:bg-primary-active text-white shadow-sm transition-all duration-200 hover:scale-105 active:scale-95"
           title="Focus Mode"
           aria-label="Focus Mode"
         >
@@ -33,19 +33,19 @@ export function HeaderBar() {
         {/* Theme Toggle Button */}
         <button
           onClick={toggleTheme}
-          className="flex h-9 w-9 items-center justify-center rounded-full text-[#3d3d3a] dark:text-[#faf9f5] bg-[#faf9f5] dark:bg-[#252320] hover:bg-[#efe9de] dark:hover:bg-[#2d2b27] border border-[#e6dfd8] dark:border-[#2d2b27] transition-colors"
+          className="flex h-9 w-9 items-center justify-center rounded-full text-body dark:text-on-dark bg-canvas dark:bg-surface-dark-elevated hover:bg-surface-card dark:hover:bg-hairline-dark border border-hairline dark:border-hairline-dark transition-colors"
           title="Toggle Theme"
           aria-label="Toggle Theme"
         >
           {theme === 'dark' ? (
-            <Sun className="h-4 w-4 text-[#e8a55a]" />
+            <Sun className="h-4 w-4 text-accent-amber" />
           ) : (
-            <Moon className="h-4 w-4 text-[#3d3d3a]" />
+            <Moon className="h-4 w-4 text-body" />
           )}
         </button>
 
         {/* Profile Avatar placeholder */}
-        <div className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e6dfd8] dark:border-[#2d2b27] bg-[#efe9de] dark:bg-[#252320] text-[#141413] dark:text-[#faf9f5]">
+        <div className="flex h-9 w-9 items-center justify-center rounded-full border border-hairline dark:border-hairline-dark bg-surface-card dark:bg-surface-dark-elevated text-ink dark:text-on-dark">
           <User className="h-4 w-4" />
         </div>
       </div>

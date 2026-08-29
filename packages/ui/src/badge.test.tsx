@@ -8,10 +8,10 @@ describe('Badge and StatusIndicator suite', () => {
     const { rerender } = render(<Badge variant="default">Active</Badge>);
     const badge = screen.getByText('Active');
     expect(badge).toBeInTheDocument();
-    expect(badge).toHaveClass('bg-[#efe9de]');
+    expect(badge).toHaveClass('bg-surface-card');
 
     rerender(<Badge variant="coral">Coral</Badge>);
-    expect(screen.getByText('Coral')).toHaveClass('bg-[#cc785c]');
+    expect(screen.getByText('Coral')).toHaveClass('bg-primary');
   });
 
   it('renders StatusIndicator with pulse effect when active', () => {
