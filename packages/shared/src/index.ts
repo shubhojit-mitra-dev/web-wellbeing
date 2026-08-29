@@ -13,6 +13,7 @@ export * from './types/device.types';
 export * from './types/analytics.types';
 export * from './types/branded.types';
 export * from './types/result.types';
+export * from './types/repository.types';
 
 // Constants
 export * from './constants/categories';
