@@ -2,7 +2,6 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, act } from '@testing-library/react';
 import { AuthProvider, useAuth } from './AuthProvider';
 
-// Mock getSupabaseClient
 vi.mock('@web-wellbeing/supabase', () => ({
   getSupabaseClient: () => ({
     auth: {
@@ -10,8 +9,12 @@ vi.mock('@web-wellbeing/supabase', () => ({
       onAuthStateChange: vi.fn().mockReturnValue({
         data: { subscription: { unsubscribe: vi.fn() } },
       }),
-      signUp: vi.fn().mockResolvedValue({ error: null }),
+      signUp: vi.fn().mockResolvedValue({ data: { user: { id: '123' } }, error: null }),
       signInWithPassword: vi.fn().mockResolvedValue({ error: null }),
+      signInWithOAuth: vi.fn().mockResolvedValue({ error: null }),
+      resetPasswordForEmail: vi.fn().mockResolvedValue({ error: null }),
+      verifyOtp: vi.fn().mockResolvedValue({ error: null }),
+      resend: vi.fn().mockResolvedValue({ error: null }),
       signOut: vi.fn().mockResolvedValue({ error: null }),
     },
   }),
